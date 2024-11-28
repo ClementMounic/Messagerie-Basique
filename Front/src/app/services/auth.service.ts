@@ -6,18 +6,20 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrlLogin = 'http://localhost:8080/users/exists';
-  private apiUrlRegister = 'http://localhost:8080/users';
+  private apiUrlLogin = 'http://localhost:5000/login';
+  private apiUrlRegister = 'http://localhost:5000/register';
 
   constructor(private http: HttpClient) {}
 
-  login(username: string, password: string): Observable<boolean> {
-    const url = `${this.apiUrlLogin}?username=${username}&password=${password}`;
-    return this.http.get<void>(url, { observe: 'response' }).pipe(
+  login(email: string, password: string): Observable<boolean> {
+    const url = `${this.apiUrlLogin}?email=${email}&password=${password}`;
+    return this.http.get(url, { observe: 'response' }).pipe(
       map((response) => {
         // Si le statut HTTP est 200, l'utilisateur existe
         const isLoggedIn = response.status === 200;
         localStorage.setItem('isLoggedIn', JSON.stringify(isLoggedIn));
+        const userId = (response.body as any).user_id;
+        localStorage.setItem('userId', JSON.stringify(userId.toString()));
         return isLoggedIn;
       }),
       catchError((error: HttpErrorResponse) => {
@@ -41,9 +43,9 @@ export class AuthService {
     return JSON.parse(localStorage.getItem('isLoggedIn') || 'false');
   }
 
-  register(username: string, password: string): Observable<any> {
-    const user = { username, password };
-    return this.http.post<any>(this.apiUrlRegister, user).pipe(
+  register(username: string, email:String, password: string): Observable<any> {
+    const user = { username, email, password };
+    return this.http.post(this.apiUrlRegister, user).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Erreur lors de l\'inscription', error);
         let errorMessage = 'Erreur lors de l\'inscription. Veuillez réessayer.';

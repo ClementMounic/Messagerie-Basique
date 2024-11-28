@@ -1,0 +1,27 @@
+<div class="component-container">
+    <div class="sidebar">
+    <a routerLink="/acceuil" class="sidebar-title">Accueil</a>
+      <h3 class="sidebar-title">Chats</h3>
+      <ul *ngIf="chats.length > 0; else noChats" class="chat-list">
+        <li *ngFor="let chat of chats" class="chat-item" (click)="onChatSelect(chat)">
+          <span>{{ chat.partnerName }}</span>
+        </li>
+      </ul>
+      <ng-template #noChats>
+        <p class="no-chats">No chats available.</p>
+      </ng-template>
+      <div class="create-chat">
+        <h3 class="section-title">Créer un Chat</h3>
+        <div class="search-bar">
+          <input type="text" placeholder="Rechercher un utilisateur" [(ngModel)]="searchTerm" (input)="onSearch()" class="search-input"/>
+          <ul *ngIf="filteredUsers.length > 0" class="user-list">
+            <li *ngFor="let user of filteredUsers" class="user-item" (click)="selectUser(user)">
+              {{ user.username }}
+            </li>
+          </ul>
+        </div>
+        <button [disabled]="!selectedUser" (click)="createChat()" class="create-button">Créer un Chat</button>
+      </div>
+    </div>
+  </div>
+  

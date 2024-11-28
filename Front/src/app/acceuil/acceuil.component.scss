@@ -1,0 +1,26 @@
+.welcome-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #ffffff;
+    font-family: 'Arial', sans-serif;
+  
+    .welcome-message {
+      text-align: center;
+      padding: 20px;
+  
+      h1 {
+        font-size: 2rem;
+        color: #333333;
+        margin-bottom: 10px;
+      }
+  
+      p {
+        font-size: 1.2rem;
+        color: #555555;
+        margin: 0;
+      }
+    }
+  }
+  

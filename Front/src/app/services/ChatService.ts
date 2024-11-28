@@ -6,22 +6,32 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ChatService {
-  private apiUrl = 'http://localhost:8080/chats'; // URL de votre backend
+  private apiUrl = 'http://localhost:5000/chats'; // Remplacez par votre URL backend
 
   constructor(private http: HttpClient) {}
 
-  // Créer ou obtenir une conversation entre deux utilisateurs
-  createOrGetChat(userOneId: number, userTwoId: number): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/create?userOneId=${userOneId}&userTwoId=${userTwoId}`, {});
+  getChats(userId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/${userId}`);
   }
 
-  // Récupérer une conversation par son ID
-  getChat(chatId: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${chatId}`);
-  }
+    getUser(userId: number): Observable<any> {
+        return this.http.get<any>(`http://localhost:5000/users/${userId}`);
+    }
 
-  // Envoyer un message dans une conversation
-  sendMessage(chatId: number, senderId: number, content: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/${chatId}/messages?senderId=${senderId}`, content);
-  }
+    searchUsers(query: string): Observable<any[]> {
+        return this.http.get<any[]>(`http://localhost:5000/users/search?query=${query}`);
+      }
+      
+      createChat(user1_id:number,user2_id: number): Observable<any> {
+        return this.http.post(`${this.apiUrl}`, { user1_id,user2_id });
+      }
+
+      getMessages(chatId: number): Observable<any[]> {
+        return this.http.get<any[]>(`http://localhost:5000/messages?chatId=${chatId}`);
+      }
+    
+      sendMessage(chat_id:number,sender_id:number,content:string): Observable<any> {
+        return this.http.post<any>(`http://localhost:5000/messages`, {chat_id,sender_id,content});
+      }
+      
 }

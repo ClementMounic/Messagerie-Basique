@@ -12,22 +12,23 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./connexion.component.css'], // Correction de `styleUrl` en `styleUrls`
 })
 export class ConnexionComponent {
-  username: string = '';
+  email: string = '';
   password: string = '';
   errorMessage: string = ''; // Message d'erreur pour l'UI
 
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(): void {
-    if (!this.username || !this.password) {
+    if (!this.email || !this.password) {
       this.errorMessage = 'Veuillez remplir tous les champs';
       return;
     }
   
-    this.authService.login(this.username, this.password).subscribe({
+    this.authService.login(this.email, this.password).subscribe({
       next: (isLoggedIn: boolean) => {
         if (isLoggedIn) {
           this.router.navigate(['/']); // Redirige vers la page principale
+          
         }
       },
       error: (err: any) => {

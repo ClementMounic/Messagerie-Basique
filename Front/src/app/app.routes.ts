@@ -13,7 +13,12 @@ export const routes: Routes = [
     {
         path:'',
         component: MainComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        children: [
+            { path: 'accueil', loadComponent: () => import('./acceuil/acceuil.component').then(c => c.AcceuilComponent) },
+            { path: 'chat/:id', loadComponent: () => import('./chat/chat.component').then(c => c.ChatComponent) },
+            { path: '', redirectTo: 'accueil', pathMatch: 'full' },
+          ]
     },
 
     {

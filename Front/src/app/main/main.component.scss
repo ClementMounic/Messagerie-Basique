@@ -1,62 +1,41 @@
-.container {
+.main-layout {
+  display: flex; /* Disposition en colonnes */
+  height: 100%; /* Hauteur de la fenêtre */
+
+  .sidebar-column {
+    width: 300px; /* Largeur fixe pour la colonne de gauche */
+    border-right: 1px solid #ddd; /* Ligne séparatrice */
     display: flex;
+    flex-direction: column; /* Organisation verticale */
+    gap: 1rem; /* Espacement entre les éléments */
+
+    .logout-button {
+      width: 90%; /* Le bouton occupe toute la largeur */
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      transition: background-color 0.3s;
+      margin-left: 5%;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
   }
-  
-  .sidebar {
-    width: 250px;
-    background-color: #f4f4f4;
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+
+  .content-column {
+    flex-grow: 1; /* Prend tout l'espace restant */
+    padding: 1rem; /* Espacement interne */
+    background-color: #fff; /* Couleur de fond blanche */
+    overflow-y: auto; /* Ajoute un défilement si nécessaire */
   }
-  
-  .sidebar ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .sidebar li {
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .sidebar li:hover {
-    background-color: #ddd;
-  }
-  
-  .chat-window {
-    flex: 1;
-    padding: 20px;
-    background-color: #fff;
-  }
-  
-  .messages {
-    max-height: 300px;
-    overflow-y: auto;
-  }
-  
-  .message {
-    margin-bottom: 10px;
-  }
-  
-  .message-input {
-    margin-top: 20px;
-  }
-  
-  textarea {
-    width: 100%;
-    height: 50px;
-  }
-  
-  button {
-    padding: 10px;
-    margin-top: 10px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
+}
+
+h1{
+  text-align: center;
+  margin-bottom: 1rem;
+}

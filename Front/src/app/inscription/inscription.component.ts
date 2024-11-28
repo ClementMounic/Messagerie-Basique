@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 export class InscriptionComponent {
   username: string = '';
   password: string = '';
+  email: string = '';
   errorMessage: string = ''; // Message d'erreur
 
 
@@ -28,7 +29,7 @@ export class InscriptionComponent {
       return;
     }
 
-    this.authService.register(this.username, this.password).subscribe({
+    this.authService.register(this.username,this.email, this.password).subscribe({
       next: () => {
         this.errorMessage = ''; // Réinitialiser le message d'erreur
         this.router.navigate(['/connexion']); // Redirige après 3 secondes

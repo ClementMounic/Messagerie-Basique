@@ -1,1 +1,11 @@
-<input type="button" value="Se déconnecter" (click)="logout()" />
+<div class="main-layout">
+    <div class="sidebar-column">
+        <h1>{{this.username}}</h1>
+      <input type="button" value="Se déconnecter" (click)="logout()" class="logout-button" />
+      <app-listchat [userId]="userId"></app-listchat>
+    </div>
+    <div class="content-column">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  
